@@ -1,57 +1,100 @@
 package com.example.cst2335finalproject
 
-
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
-import android.widget.EditText
-import android.widget.ListView
-import androidx.appcompat.widget.Toolbar
+import android.widget.Switch
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.navigation.NavigationView
-import org.json.JSONArray
-import org.json.JSONObject
-import java.net.URL
+import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.Fragment
+import com.example.cst2335finalproject.UI.Favorites.FavoritesFragments
+import com.example.cst2335finalproject.UI.Home.HomeFragment
 
+class MainActivity : AppCompatActivity() {
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-    val item_selected = "item"
-    val item_position = "position"
-    val item_id = "id"
-    val article_title = "title"
-    val web_url = "web_url"
-    val activity = "activity"
-    var articles: ArrayList<String>? = null
-
-    var list: ListView? = null
-    var search: EditText? = null
-    var list_adapter: MyListAdapter? = null
-    var json: JSONObject? = null
-    var article_data: JSONArray? = null
-    var url: URL? = null
-    var guardian: Guardian? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main);
-        //constant toolbar
-        val myToolbar : Toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(myToolbar)
-        supportActionBar?.title = "Guardian News";
+        setContentView(R.layout.activity_main)
 
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
 
-        // Your onCreate logic here
+        //  switch for dark mode
+        val switchDarkMode: Switch = findViewById(R.id.switchDarkMode)
+        switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
+            // Handle dark mode setting change
+            if (isChecked) {
+                //  dark mode
+                enableDarkMode()
+            } else {
+                //  dark mode
+                disableDarkMode()
+            }
+        }
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        // Handle navigation item selection here
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
         return true
     }
 
-    companion object {
-        const val item_selected = "item"
-        const val item_position = "position"
-        const val item_id = "id"
-        const val article_title = "title"
-        const val web_url = "web_url"
-        const val activity = "activity"
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_home -> {
+                // Load Home Fragment
+                loadHomeFragment()
+                true
+            }
+            R.id.menu_favorites -> {
+                // Favorites Fragment
+                loadFavoritesFragment()
+                true
+            }
+            R.id.menu_settings -> {
+                // settings UI
+                // load a separate fragment
+                true
+            }
+            R.id.menu_logout -> {
+                // Logout
+                logout()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    // Load Home Fragment initially
+    private fun loadHomeFragment() {
+        val fragmentManager = supportFragmentManager
+        val homeFragment: Fragment = HomeFragment()
+        fragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, homeFragment)
+            .commit()
+    }
+
+    //  Favorites Fragment
+    private fun loadFavoritesFragment() {
+        val fragmentManager = supportFragmentManager
+        val favoritesFragment: Fragment = FavoritesFragments()
+        fragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, favoritesFragment)
+            .commit()
+    }
+
+    private fun enableDarkMode() {
+        // Implement dark mode logic here
+    }
+
+    private fun disableDarkMode() {
+        //  disable dark mode here
+    }
+
+    // Logout function
+    private fun logout() {
+        // Close the app
+        finish()
     }
 }
+

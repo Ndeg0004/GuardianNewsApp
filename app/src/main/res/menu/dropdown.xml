@@ -6,8 +6,8 @@
 
          />
      <item
-         android:id="@+id/Login"
-         android:title="@string/Login"
+         android:id="@+id/logout"
+         android:title="@string/Logout"
 
          />
 </menu>

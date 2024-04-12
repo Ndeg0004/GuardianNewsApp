@@ -11,67 +11,28 @@
     <include
         layout="@layout/toolbar"/>
 
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-<!---->
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="31dp"
-            android:fontFamily="Georgia"
-            android:text="@string/Previous"
-            android:textSize="24sp" />
-
-        <ListView
-            android:id="@+id/list_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:dividerHeight="10dp"
-            android:layout_weight="1"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/search"
-                android:layout_width="300dp"
-                android:layout_height="48dp"
-                android:fontFamily="times new roman"
-                android:inputType="text" />
-
-            <Button
-
-                android:id="@+id/searchbtn"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/Search" />
-
-        </LinearLayout>
-
-
-    </LinearLayout>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/relative_layout" >
 
         <ProgressBar
+            android:id="@+id/prog"
+            style="@android:attr/progressBarStyleLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/prog"
-            android:layout_centerHorizontal="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="196dp"
             android:max="3"
-            android:progress="100"
-            style="@android:attr/progressBarStyleLarge" />
+            android:progress="100" />
 
     </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer_layout"
@@ -89,4 +50,3 @@
             android:id="@+id/nav_view"/>
     </androidx.drawerlayout.widget.DrawerLayout>
 </LinearLayout>
-

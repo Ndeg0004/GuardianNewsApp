@@ -22,6 +22,10 @@ public class Article {
     public String getUrl() {
         return url;
     }
+
+    public char[] getId() {
+        return new char[0];
+    }
 }
 
 
